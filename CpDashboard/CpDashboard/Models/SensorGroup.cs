@@ -14,6 +14,7 @@ namespace CpDashboard.Models
 
         [StringLength(1000), Display(Name ="Group Description")]
         public string GroupDescription { get; set; }
-        public virtual ICollection<SensorType> SensorTypes { get; set; }
+        public virtual ICollection<Sensor> Sensors { get; set; }
+        //public virtual ICollection<SensorType> SensorTypes { get; set; }
     }
 }

@@ -13,23 +13,25 @@ namespace CpDashboard
     {
         private CpDashboardContext _db = new CpDashboardContext();
         public IQueryable<Sensor> s;
+        public Sensor asensor;
         protected void Page_Load(object sender, EventArgs e)
         {
-            string tid = Request.QueryString["type_id"];
-            if(!string.IsNullOrEmpty(tid) && int.TryParse(tid, out int t_id))
+            string tid = Request.QueryString["group_id"];
+            if (!string.IsNullOrEmpty(tid) && int.TryParse(tid, out int g_id))
             {
-                var vals = _db.Sensors.Where(s => s.TypeId == t_id);
+                var vals = _db.Sensors.Where(s => s.GroupId == g_id);
                 this.s = vals;
+                this.asensor = _db.Sensors.SingleOrDefault(s => s.GroupId == g_id);
             }
         }
 
-        public IQueryable<CpDashboard.Models.Sensor> GetSensors([QueryString("type_id")] int? typeid)
+        public CpDashboard.Models.Sensor GetSensors([QueryString("group_id")] int? groupid)
         {
-            IQueryable<Sensor> sensor = _db.Sensors;
+            var sensor = _db.Sensors.SingleOrDefault(s => s.GroupId == groupid);
 
-            if(typeid.HasValue && typeid > 0)
+            if (groupid.HasValue && groupid > 0)
             {
-                sensor = sensor.Where(s => s.TypeId == typeid);
+                sensor = _db.Sensors.SingleOrDefault(s => s.GroupId == groupid);
             }
             return sensor;
         }

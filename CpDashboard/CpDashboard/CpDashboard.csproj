@@ -2275,7 +2275,6 @@
     </Compile>
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorGroup.cs" />
-    <Compile Include="Models\SensorType.cs" />
     <Compile Include="ProfileEdit.aspx.cs">
       <DependentUpon>ProfileEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

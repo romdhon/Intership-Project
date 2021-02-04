@@ -48,12 +48,12 @@
                     <hr class="sidebar-divider my-0">
 
                     <!-- Nav Item - Dashboard -->
-                    <%--<li class="nav-item active">
+                    <li class="nav-item active">
                         <a class="nav-link" href="~/Default.aspx" runat="server">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span></a>
-                    </li>--%>
-                    <li class="nav-item active">
+                    </li>
+                    <%--<li class="nav-item active">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                             aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -68,7 +68,7 @@
                                 <a class="collapse-item" href="/AddSensor.aspx">Add New Sensor</a>
                             </div>
                         </div>
-                    </li>
+                    </li>--%>
 
                     <!-- Divider -->
                     <hr class="sidebar-divider">
@@ -81,12 +81,12 @@
                     <!-- Nav Item - Pages Collapse Menu -->
                     <% foreach (var group in sensorgroup){ %>
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse<%: group.GroupName %>"
-                            aria-expanded="true" aria-controls="collapse<%: group.GroupName %>">
+                        <a class="nav-link collapsed" href="/SensorList.aspx?group_id=<%: group.GroupID %>">
                             <i class="fas fa-fw fa-cog"></i>
                             <span><%: group.GroupName %></span>
                         </a>
-                        <div id="collapse<%: group.GroupName %>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+
+                        <%--<div id="collapse<%: group.GroupName %>" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 
                                 <h6 class="collapse-header">Components</h6>
@@ -97,7 +97,7 @@
                                     <% } %>
                                 <% } %>
                             </div>
-                        </div>
+                        </div>--%>
                     </li>
                     <% } %>
 

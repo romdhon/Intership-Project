@@ -15,7 +15,6 @@ namespace CpDashboard.Models
         public DbSet<Position> Positions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Sensor> Sensors { get; set; }
-        public DbSet<SensorType> SensorTypes { get; set; }
         public DbSet<SensorGroup> SensorGroups { get; set; }
 
 

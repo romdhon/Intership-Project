@@ -99,9 +99,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageContent" runat="server">
-    <asp:ListView ID="sensorList" ItemType="CpDashboard.Models.Sensor" SelectMethod="GetSensors" runat="server">
-        <ItemTemplate>
-            <h1><%#: Item.SensorName %></h1>
+            <h1><%: asensor.SensorName %></h1>
             <div class="row">
                 <!-- Area Chart -->
                 <div class="col-xl-12 col-lg-7">
@@ -128,14 +126,13 @@
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="chart-area">
-                                <canvas id="myAreaChart<%#: Item.SensorID %>"></canvas>
+                                <canvas id="myAreaChart<%: asensor.SensorID %>"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
-        </ItemTemplate>
-    </asp:ListView>
+           
+    
 </asp:Content>
