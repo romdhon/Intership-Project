@@ -11,7 +11,8 @@ namespace CpDashboard.Models
         [Key]
         public int SensorID { get; set; }
         public  DateTime TimeOperate { get; set; }
-        public string SensorName { get; set; }
+
+        //public string SensorName { get; set; }
         public string SensorVal { get; set; }
         public int? GroupId { get; set; }
         public virtual SensorGroup SensorGroup { get; set; }

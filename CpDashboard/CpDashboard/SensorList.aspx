@@ -99,7 +99,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageContent" runat="server">
-            <h1><%: asensor.SensorName %></h1>
+            <h1><%: group.GroupName %></h1>
             <div class="row">
                 <!-- Area Chart -->
                 <div class="col-xl-12 col-lg-7">

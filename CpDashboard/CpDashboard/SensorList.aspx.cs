@@ -14,6 +14,7 @@ namespace CpDashboard
         private CpDashboardContext _db = new CpDashboardContext();
         public IQueryable<Sensor> s;
         public Sensor asensor;
+        public SensorGroup group;
         protected void Page_Load(object sender, EventArgs e)
         {
             string tid = Request.QueryString["group_id"];
@@ -22,18 +23,9 @@ namespace CpDashboard
                 var vals = _db.Sensors.Where(s => s.GroupId == g_id);
                 this.s = vals;
                 this.asensor = _db.Sensors.SingleOrDefault(s => s.GroupId == g_id);
+                this.group = _db.SensorGroups.SingleOrDefault(g => g.GroupID == g_id);
             }
         }
 
-        public CpDashboard.Models.Sensor GetSensors([QueryString("group_id")] int? groupid)
-        {
-            var sensor = _db.Sensors.SingleOrDefault(s => s.GroupId == groupid);
-
-            if (groupid.HasValue && groupid > 0)
-            {
-                sensor = _db.Sensors.SingleOrDefault(s => s.GroupId == groupid);
-            }
-            return sensor;
-        }
     }
 }
