@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="SensorList.aspx.cs" Inherits="CpDashboard.SensorList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="JSMain" runat="server">
-    <% foreach (var sensor in s){ %>
+    
     <script>
-        var ctx = document.getElementById("myAreaChart" + "<%: sensor.SensorID %>");
+        var ctx = document.getElementById("myAreaChart" + "<%: asensor.SensorID %>");
         var myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -91,7 +91,6 @@
             }
         });
     </script>
-    <% } %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeader" runat="server">

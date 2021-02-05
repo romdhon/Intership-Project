@@ -14,6 +14,8 @@ namespace CpDashboard.Models
             context.SaveChanges();
             GetUsers().ForEach(u => context.Users.Add(u));
             context.SaveChanges();
+            getSensorGroups().ForEach(g => context.SensorGroups.Add(g));
+            context.SaveChanges();
             base.Seed(context);
         }
 
@@ -38,6 +40,39 @@ namespace CpDashboard.Models
                 }
             };
             return positions;
+        }
+
+        private static List<SensorGroup> getSensorGroups()
+        {
+            var sensorGroup = new List<SensorGroup>{
+                new SensorGroup
+                {
+                    GroupID=1,
+                    GroupName="Thermocouple1",
+                    GroupDescription="First Thermo"
+                },
+                new SensorGroup
+                {
+                    GroupID=2,
+                    GroupName="Thermocouple2",
+                    GroupDescription="Second Thermo"
+                },
+                new SensorGroup
+                {
+                    GroupID=3,
+                    GroupName="Thermocouple3",
+                    GroupDescription="Third Thermo"
+                },
+                new SensorGroup
+                {
+                    GroupID=4,
+                    GroupName="Thermocouple4",
+                    GroupDescription="Fourth Thermo"
+                }
+
+
+            };
+            return sensorGroup;
         }
 
         private static List<User> GetUsers()
