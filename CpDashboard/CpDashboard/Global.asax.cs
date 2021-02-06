@@ -92,7 +92,7 @@ namespace CpDashboard
         private void SetTimer()
         {
             // Create a timer with a five minute interval.
-            aTimer = new System.Timers.Timer(120000);
+            aTimer = new System.Timers.Timer(2000);
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += RefreshChannelValueUshortFormat;
             aTimer.AutoReset = true;
@@ -116,8 +116,6 @@ namespace CpDashboard
             {
                 Array.Copy(bEnabled, 0, m_bChEnabled, 0, m_iAiTotal);
             }
-            //else
-            //    txtReadCount.Text += "GetChannelEnabled() failed;";
         }
 
         private void startSending()
