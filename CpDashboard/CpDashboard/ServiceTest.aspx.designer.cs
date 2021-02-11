@@ -11,7 +11,7 @@ namespace CpDashboard
 {
 
 
-    public partial class _Default
+    public partial class ServiceTest
     {
     }
 }

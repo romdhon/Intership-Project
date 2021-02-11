@@ -57,41 +57,8 @@ namespace CpDashboard
             }
         }
 
-        //private void getSensorVal()
-        //{
-        //    string groupId = Request.QueryString["group_id"];
-
-        //    if(int.TryParse(groupId, out int g_id))
-        //    {
-        //        var allSensorVal = _db.Sensors.Where(s => s.GroupId == g_id);
-
-        //        // loop through all sensors and add into a list
-        //        foreach (var sensor in allSensorVal)
-        //        {
-        //            sensorValList.Add(sensor.SensorVal.ToString());
-        //        }
-
-        //        this.sensorValStr = "";
-        //        //put the last five value into string
-        //        for (int s = sensorValList.Count - 12; s < sensorValList.Count; s++)
-        //        {
-        //            this.sensorValStr += sensorValList[s].ToString() + ", ";
-        //        }
-        //    }
-            
-        //}
-
-        private void setTimer()
+        private List<string> getSensorVal()
         {
-            timer = new System.Timers.Timer(2000);
-            timer.Elapsed += getSensorVal;
-            timer.AutoReset = true;
-            timer.Enabled = true;
-        }
-
-        private void getSensorVal(object source, ElapsedEventArgs e)
-        {
-
             if (int.TryParse(groupId, out int g_id))
             {
                 var allSensorVal = _db.Sensors.Where(s => s.GroupId == g_id);
@@ -111,6 +78,7 @@ namespace CpDashboard
                 }
                 //Debug.WriteLine(this.sensorValStr.ToString());
             }
+            return sensorValList;
         }
 
     }

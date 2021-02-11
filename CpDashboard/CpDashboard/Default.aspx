@@ -2,12 +2,25 @@
 
 
 <asp:Content ID="DefaultJS" ContentPlaceHolderID="JSMain" runat="server">
-    <script>
+    <script language="javascript" type="text/javascript">
+
+        function GetStr() {
+            var valStr = '<%= thermoValStr1 %>';
+            var valArr = valStr.split(',');
+            alert(valArr);
+        }
+        
+        var valStr = '<%= thermoValStr1 %>';
+        var valArr = valStr.split(',');
+
+        var dtStr = '<%= dtStr1 %>';
+        var dtArr = dtStr.split(',');
+        
         var ctx = document.getElementById("myAreaChart");
         var myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [<%: dtStr1 %>],
+                labels: dtArr,
                 datasets: [{
                     label: "Temperature",
                     lineTension: 0.3,
@@ -21,7 +34,7 @@
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: [<%: thermoValStr1 %>],
+                    data: valArr,
                 }],
             },
             options: {

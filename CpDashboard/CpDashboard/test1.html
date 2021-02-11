@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var pureUrl = new URL(window.location.href).searchParams;
+            var urlID = pureUrl.get('id');
+            //alert(urlID);
+
+
+            $('#btn1').click(function () {
+                var textId = $('#txt1').val();
+                $.ajax({
+                    url: 'SensorService.asmx.cs/GetSensorVal',
+                    data: { groupId: textId },
+                    method: 'post',
+                    dataType: 'xml',
+                    success: function (data) {
+                        var jqueryXml = $(data);
+                        alert('Success');
+                    },
+                    error: function (err) {
+                        var errors = $(err);
+                        alert("Error ");
+
+                    }
+                });
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <input type="text" id="txt1" placeholder="Group Name" />
+    <input id="btn1" type="button" value="Submit" />
+</body>
+</html>
