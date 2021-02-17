@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Accounts\ForgotPasswordPage.aspx" />
     <Content Include="Accounts\LoginPage.aspx" />
     <Content Include="Accounts\RegisterPage.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
@@ -2102,6 +2103,13 @@
     <Content Include="vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\ForgotPasswordPage.aspx.cs">
+      <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accounts\ForgotPasswordPage.aspx.designer.cs">
+      <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Accounts\LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2290,6 +2298,7 @@
     </Compile>
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorGroup.cs" />
+    <Compile Include="Models\ServiceAllSensor.cs" />
     <Compile Include="Models\ServiceGroup.cs" />
     <Compile Include="Models\ServiceSensor.cs" />
     <Compile Include="ProfileEdit.aspx.cs">

@@ -17,6 +17,14 @@
                     var sensorDt = datas.find('TimeOperate').text().split('~');
                     //alert(sensorDt);
 
+                    //array for lines
+                    var lines = [];
+
+                    function multilineColors(sensorNum, transparent) {
+                        var lineColors = ["rgba(223, 115, 78, ", "rgba(78, 223, 115, ", "rgba(78, 115, 223, ", "rgba(255, 223, 78, "]
+                        return lineColors[sensorNum] + transparent + ")";
+                    }
+
                     //alert(sensorVal.find('SensorName').text())
                     var ctx = document.getElementById("myAreaChart" + group_id);
                     var myLineChart = new Chart(ctx, {
@@ -26,14 +34,14 @@
                             datasets: [{
                                 label: sensorName,
                                 lineTension: 0.3,
-                                backgroundColor: "rgba(78, 115, 223, 0.05)",
-                                borderColor: "rgba(78, 115, 223, 1)",
+                                backgroundColor: multilineColors(parseInt(group_id)-1, 0.05),
+                                borderColor: multilineColors(parseInt(group_id) - 1, 1),
                                 pointRadius: 3,
-                                pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                                pointBorderColor: "rgba(78, 115, 223, 1)",
+                                pointBackgroundColor: multilineColors(parseInt(group_id) - 1, 1),
+                                pointBorderColor: multilineColors(parseInt(group_id) - 1, 1),
                                 pointHoverRadius: 3,
-                                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                pointHoverBackgroundColor: multilineColors(parseInt(group_id) - 1, 1),
+                                pointHoverBorderColor: multilineColors(parseInt(group_id) - 1, 1),
                                 pointHitRadius: 10,
                                 pointBorderWidth: 2,
                                 data: sensorVal,

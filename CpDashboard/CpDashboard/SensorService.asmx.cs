@@ -1,5 +1,6 @@
 ﻿using CpDashboard.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -103,6 +104,81 @@ namespace CpDashboard
 
             }
             return ss;
+        }
+
+        [WebMethod]
+        public ServiceAllSensor GetAllSensors()
+        {
+            ServiceAllSensor allSensor = new ServiceAllSensor();
+            var group = _db.SensorGroups.ToList();
+            string sensorName = "";
+            string sensorVal = "";
+            string sensorDt = "";
+
+            //initiate string for a dt and a sensor
+            string lastVal = "";
+            string lastDt = "";
+
+            
+
+            var groupCount = group.Count;
+
+            for(int i=0; i<groupCount; i++)
+            {
+                //Sensor value
+                List<string> sensorList = new List<string>();
+                string sensorValStr = "";
+                //sensor datetime
+                List<DateTime> sensorDtList = new List<DateTime>();
+                string sensorDtStr = "";
+
+                
+
+                var sensors = _db.Sensors.Where(s => s.GroupId == i + 1);
+                foreach (var sensor in sensors)
+                {
+                    sensorList.Add(sensor.SensorVal.ToString());
+                    sensorDtList.Add(DateTime.Parse(sensor.TimeOperate.ToString()));
+                }
+
+                var sensorCount = sensorList.Count;
+
+                //get only 12 last values
+                for(int j=sensorCount -12; j<sensorCount; j++)
+                {
+                    if(j > sensorCount - 12)
+                    {
+                        sensorValStr += "~";
+                        sensorDtStr += "~";
+                    }
+                    sensorValStr += sensorList[j].ToString();
+                    sensorDtStr += sensorDtList[j].TimeOfDay.ToString();
+                }
+                if(i > 0)
+                {
+                    sensorName += "~";
+                    lastVal += "~";
+                    lastDt += "~";
+                    sensorVal += "<";
+                    sensorDt += "<";
+                }
+                //add each name into array
+                sensorName += group[i].GroupName.ToString();
+                sensorVal += sensorValStr;
+                sensorDt += sensorDtStr;
+
+                lastVal += sensors.ToList().Last().SensorVal.ToString();
+                lastDt += DateTime.Parse(sensors.ToList().Last().TimeOperate.ToString()).TimeOfDay.ToString();
+            }
+
+
+            allSensor.SensorNames = sensorName;
+            allSensor.SensorValArr = sensorVal;
+            allSensor.TimeOperateArr = sensorDt;
+            allSensor.LastVal = lastVal;
+            allSensor.LastDt = lastDt;
+
+            return allSensor;
         }
     }
 }

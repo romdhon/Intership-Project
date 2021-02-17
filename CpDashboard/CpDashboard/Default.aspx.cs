@@ -69,6 +69,10 @@ namespace CpDashboard
             //Debug.Write(dtstr);
         }
 
-
+        protected void chartTimer_Tick(object sender, EventArgs e)
+        {
+            //ScriptManager.RegisterStartupScript(this, GetType(), "getAllData", "getAllData()", true);
+            //chartLabel.Text = DateTime.Now.ToString();
+        }
     }
 }

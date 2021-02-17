@@ -7,38 +7,47 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CpDashboard
+namespace CpDashboard.Accounts
 {
 
 
-    public partial class _Default
+    public partial class ForgotPasswordPage
     {
 
         /// <summary>
-        /// chartScript control.
+        /// forgotEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager chartScript;
+        protected global::System.Web.UI.WebControls.TextBox forgotEmail;
 
         /// <summary>
-        /// chartTimer control.
+        /// forgotPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.Timer chartTimer;
+        protected global::System.Web.UI.WebControls.TextBox forgotPass;
 
         /// <summary>
-        /// chartUpdatePanel control.
+        /// forgotRepass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel chartUpdatePanel;
+        protected global::System.Web.UI.WebControls.TextBox forgotRepass;
+
+        /// <summary>
+        /// EnterNewPass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button EnterNewPass;
     }
 }
