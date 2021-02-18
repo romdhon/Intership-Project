@@ -21,22 +21,34 @@ namespace CpDashboard.Accounts
         protected void EnterNewPass_Click(object sender, EventArgs e)
         {
             IQueryable<User> user = _db.Users;
+            var new_user = user.SingleOrDefault(u => u.UserName == forgotEmail.Text);
 
-            if (!string.IsNullOrEmpty(forgotEmail.Text) && forgotPass.Text == forgotRepass.Text)
+            if (!string.IsNullOrEmpty(forgotEmail.Text) && new_user != null)
             {
-                var new_user = user.Where(u => u.UserName == forgotEmail.Text).First();
-                AddUser(ref new_user);
-                _db.SaveChanges();
-                new_user = _db.Users.SingleOrDefault(u => u.UserName == forgotEmail.Text
+                
+                if (forgotPass.Text == forgotRepass.Text)
+                {
+                    AddUser(ref new_user);
+                    _db.SaveChanges();
+                    new_user = _db.Users.SingleOrDefault(u => u.UserName == forgotEmail.Text
                                                       && u.Password == forgotPass.Text);
-                Session["Id"] = new_user.UserId;
-                Session["Username"] = new_user.UserName;
-                Session["Password"] = new_user.Password;
-                Session["Name"] = new_user.Name;
-                Session["Lastname"] = new_user.LastName;
-                Session["Position"] = _db.Positions.SingleOrDefault(p => p.PositionID == new_user.PositionID).PositionName;
-                Session["Login"] = "Active";
-                Response.Redirect("/Default.aspx");
+                    Session["Id"] = new_user.UserId;
+                    Session["Username"] = new_user.UserName;
+                    Session["Password"] = new_user.Password;
+                    Session["Name"] = new_user.Name;
+                    Session["Lastname"] = new_user.LastName;
+                    Session["Position"] = _db.Positions.SingleOrDefault(p => p.PositionID == new_user.PositionID).PositionName;
+                    Session["Login"] = "Active";
+                    Response.Redirect("/Default.aspx");
+                }
+                else
+                {
+                    forgotRepasstxt.Text = "Password does not match!";
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "emailNotExist", "emailNotExist()", true);
             }
         }
 

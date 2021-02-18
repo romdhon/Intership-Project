@@ -29,6 +29,7 @@
                                             <asp:TextBox TextMode="Email" CssClass="form-control form-control-user"
                                                 ID="forgotEmail" placeholder="Enter Email Address..."
                                                 runat="server" />
+                                            
                                         </div>
                                         <div class="form-group">
                                             <asp:TextBox TextMode="Password" CssClass="form-control form-control-user"
@@ -39,6 +40,7 @@
                                             <asp:TextBox TextMode="Password" CssClass="form-control form-control-user"
                                                 ID="forgotRepass" placeholder="Reenter Password..."
                                                 runat="server" />
+                                            <asp:Label ID="forgotRepasstxt" runat="server" style="color:red;"></asp:Label>
                                         </div>
                                         <div class="text-center">
                                             <asp:Button ID="EnterNewPass" Text="Reset Password" CssClass="btn btn-primary btn-user btn-block" 

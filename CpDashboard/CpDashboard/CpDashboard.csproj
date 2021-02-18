@@ -2296,6 +2296,8 @@
     <Compile Include="CreateGroup.aspx.designer.cs">
       <DependentUpon>CreateGroup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logics\AdamRetriever.cs" />
+    <Compile Include="Models\RealTimeSensorData.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorGroup.cs" />
     <Compile Include="Models\ServiceAllSensor.cs" />

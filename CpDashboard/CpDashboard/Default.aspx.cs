@@ -1,4 +1,5 @@
-﻿using CpDashboard.Models;
+﻿using CpDashboard.Logics;
+using CpDashboard.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;

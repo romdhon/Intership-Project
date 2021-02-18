@@ -1,4 +1,5 @@
-﻿using CpDashboard.Models;
+﻿using CpDashboard.Logics;
+using CpDashboard.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -179,6 +180,27 @@ namespace CpDashboard
             allSensor.LastDt = lastDt;
 
             return allSensor;
+        }
+
+        [WebMethod]
+        public RealTimeSensorData GetRealTimeData(string num) {
+            RealTimeSensorData realTimeData = new RealTimeSensorData();
+
+            if (int.TryParse(num, out int sensorNum))
+            {
+                
+                AdamRetriever adamData = new AdamRetriever(sensorNum);
+                Dictionary<string, string> getDic = adamData.getAllValues();
+
+                realTimeData.Sensor1 = getDic["sensor1"];
+                realTimeData.Sensor2 = getDic["sensor2"];
+                realTimeData.Sensor3 = getDic["sensor3"];
+                realTimeData.Sensor4 = getDic["sensor4"];
+                realTimeData.TimeOperate = getDic["timeOperate"];
+            }
+            
+
+            return realTimeData;
         }
     }
 }
