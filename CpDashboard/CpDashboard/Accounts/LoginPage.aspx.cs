@@ -19,9 +19,8 @@ namespace CpDashboard.Accounts
 
         protected void SubmitLogin_Click(object sender, EventArgs e)
         {
-            var new_user = _db.Users.SingleOrDefault(u => u.UserName == UserEmail.Text
-                                                      && u.Password == UserPassword.Text);
-            if(new_user != null)
+            var new_user = _db.Users.SingleOrDefault(u => u.UserName == UserEmail.Text);
+            if(new_user != null && new_user.Password.ToString() == UserPassword.Text)
             {
                 Session["Id"] = new_user.UserId;
                 Session["Username"] = new_user.UserName;
@@ -32,7 +31,7 @@ namespace CpDashboard.Accounts
                 Session["Login"] = "Active";
                 Page.Response.Redirect("~/Default.aspx");
             }
-            else
+            else if(UserPassword.Text != new_user.Password.ToString())
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "LoginFail", "LoginFail()", true);
             }

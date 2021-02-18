@@ -1,8 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="CpDashboard.Main" %>
 
-<% if (Session["Login"].ToString() == "Active")
+<% if (Session["Login"] != null)
    { %>
     <!DOCTYPE html>
+    <% if (Session["Login"].ToString() == "Active")
+        { %>
     <html lang="en">
 
     <head runat="server">
@@ -79,7 +81,8 @@
                     </div>
 
                     <!-- Nav Item - Pages Collapse Menu -->
-                    <% foreach (var group in sensorgroup){ %>
+                    <% foreach (var group in sensorgroup)
+                        { %>
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="/SensorList.aspx?group_id=<%: group.GroupID %>">
                             <i class="fas fa-fw fa-cog"></i>
@@ -360,10 +363,13 @@
                             </div>
 
                             <!-- Content Row -->
-                            <% if (Session["Position"].ToString() == "Admin" || Session["Position"].ToString() == "Normal User"){ %>
+                            <% if (Session["Position"].ToString() == "Admin" || Session["Position"].ToString() == "Normal User")
+                                { %>
                                 <asp:ContentPlaceHolder ID="PageContent" runat="server">
                                 </asp:ContentPlaceHolder>
-                            <% }else{ %>
+                            <% }
+                                else
+                                { %>
                                 <% Response.Redirect("~/ContentPage/NoAdmin.aspx"); %>  
                             <% } %>
                         </div>
@@ -443,6 +449,7 @@
         </body>
 
     </html>
+    <% } %>
 <% }else{ %>
     <% Response.Redirect("~/ContentPage/NoLogin.aspx"); %>
 <% } %>

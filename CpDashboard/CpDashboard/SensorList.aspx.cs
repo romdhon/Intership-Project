@@ -20,7 +20,10 @@ namespace CpDashboard
         public string groupId;
 
         public string sensorValStr;
+        public string sensorDtStr;
+
         public List<String> sensorValList = new List<string>();
+        public List<DateTime> sensorDtList = new List<DateTime>();
         protected void Page_Load(object sender, EventArgs e)
         {
             string tid = Request.QueryString["group_id"];
@@ -36,24 +39,22 @@ namespace CpDashboard
                 foreach (var sensor in allSensorVal)
                 {
                     sensorValList.Add(sensor.SensorVal.ToString());
+                    sensorDtList.Add(DateTime.Parse(sensor.TimeOperate.ToString()));
                 }
 
                 this.sensorValStr = "";
                 //put the last five value into string
                 for (int s = sensorValList.Count - 12; s < sensorValList.Count; s++)
                 {
-                    this.sensorValStr += sensorValList[s].ToString() + ", ";
+                    if(s > sensorValList.Count - 12)
+                    {
+                        this.sensorValStr += "~";
+                        this.sensorDtStr += "~";
+                    }
+                    this.sensorValStr += sensorValList[s].ToString();
+                    this.sensorDtStr += sensorDtList[s].TimeOfDay.ToString();
                 }
 
-                //Session["SensorVal"] = "";
-
-                //setTimer();
-                //timer.Start();
-
-                //Response.Write(this.sensorValStr.ToString());
-
-                //refresh the page every 2 sec
-                //Response.AppendHeader("Refresh", "2");
             }
         }
 
@@ -81,6 +82,10 @@ namespace CpDashboard
             return sensorValList;
         }
 
+        protected void listTimer_Tick(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "updateSensorVal", "updateSensorVal()", true);
+        }
     }
 
 }

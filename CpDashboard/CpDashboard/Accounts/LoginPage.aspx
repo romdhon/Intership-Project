@@ -26,12 +26,12 @@
                                         <div class="form-group">
                                             <asp:TextBox TextMode="Email" ID="UserEmail" placeholder="Enter Email Address..." 
                                                 runat="server" CssClass="form-control form-control-user"
-                                                aria-describedby="emailHelp"/>
+                                                aria-describedby="emailHelp" required/>
                                         </div>
                                         <div class="form-group">
 
                                             <asp:TextBox TextMode="Password" CssClass="form-control form-control-user"
-                                                id="UserPassword" placeholder="Password" runat="server"/>
+                                                id="UserPassword" placeholder="Password" runat="server" required/>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
