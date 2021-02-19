@@ -117,6 +117,7 @@ namespace CpDashboard.Logics
 
             if (adamModbus.Modbus().ReadInputRegs(iStart, m_iAiTotal, out iData))
             {
+                sensorValues.Clear();
                 for (iIdx = 0; iIdx < m_iAiTotal; iIdx++)
                 {
                     fValue[iIdx] = AnalogInput.GetScaledValue(m_Adam6000Type, m_usRange[iIdx], (ushort)iData[iIdx]);

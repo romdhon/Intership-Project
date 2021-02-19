@@ -192,11 +192,11 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="PageHeader" runat="server">
     <span class="text">Dashboard</span>
-    <asp:Label ID="label1" runat="server"></asp:Label>
+    <%--<asp:Label ID="label1" runat="server"></asp:Label>
     <asp:Label ID="label2" runat="server"></asp:Label>
     <asp:Label ID="label3" runat="server"></asp:Label>
     <asp:Label ID="label4" runat="server"></asp:Label>
-    <asp:Label ID="label5" runat="server"></asp:Label>
+    <asp:Label ID="label5" runat="server"></asp:Label>--%>
     
     <%--<input type="button" id="onOff" class="btn btn-success" value="OFFLINE"/>--%>
 </asp:Content>
