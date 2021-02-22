@@ -135,57 +135,57 @@
         var adder = 0;
 
         //using data from database uncomment this
-        //function getAllData() {
-        //    $.ajax({
-        //        url: 'SensorService.asmx/GetAllSensors',
-        //        type: 'xml',
-        //        method: 'post',
-        //        success: function (data) {
-        //            var datas = $(data);
-        //            var eachSensorVal = datas.find('LastVal').text().split('~');
-        //            var eachDtVal = datas.find('LastDt').text().split('~');
-        //            var dataCount = 12;
-        //            for (var ind = 0; ind < eachSensorVal.length; ind++) {
-        //                myLineChart.data.datasets[ind].data[dataCount] = eachSensorVal[ind];
-        //                myLineChart.data.datasets[ind].data.shift();
-        //            }
-
-        //            myLineChart.data.labels[dataCount] = eachDtVal[0];
-        //            myLineChart.data.labels.shift();
-        //            //alert(myLineChart.data.labels);
-        //            myLineChart.update();
-        //            adder++;
-        //        },
-        //        error: function (err) {
-        //            alert(err);
-        //        }
-        //    })
-        //}
-
-        //using real-time data uncomment this
         function getAllData() {
             $.ajax({
-                url: 'SensorService.asmx/GetRealTimeData',
-                data: { 'num': 4 },
-                method: 'post',
+                url: 'SensorService.asmx/GetAllSensors',
                 type: 'xml',
+                method: 'post',
                 success: function (data) {
-                    //alert("success")
                     var datas = $(data);
-                    var count = 12;
-                    for (var i = 0; i < 4; i++){
-                        myLineChart.data.datasets[i].data[count] = datas.find('Sensor' + (i + 1)).text();
-                        myLineChart.data.datasets[i].data.shift();
+                    var eachSensorVal = datas.find('LastVal').text().split('~');
+                    var eachDtVal = datas.find('LastDt').text().split('~');
+                    var dataCount = 12;
+                    for (var ind = 0; ind < eachSensorVal.length; ind++) {
+                        myLineChart.data.datasets[ind].data[dataCount] = eachSensorVal[ind];
+                        myLineChart.data.datasets[ind].data.shift();
                     }
-                    myLineChart.data.labels[count] = datas.find('TimeOperate').text()
+
+                    myLineChart.data.labels[dataCount] = eachDtVal[0];
                     myLineChart.data.labels.shift();
+                    //alert(myLineChart.data.labels);
                     myLineChart.update();
+                    adder++;
                 },
                 error: function (err) {
-                    alert("error")
+                    alert(err);
                 }
             })
         }
+
+        //using real-time data uncomment this
+        //function getAllData() {
+        //    $.ajax({
+        //        url: 'SensorService.asmx/GetRealTimeData',
+        //        data: { 'num': 4 },
+        //        method: 'post',
+        //        type: 'xml',
+        //        success: function (data) {
+        //            //alert("success")
+        //            var datas = $(data);
+        //            var count = 12;
+        //            for (var i = 0; i < 4; i++){
+        //                myLineChart.data.datasets[i].data[count] = datas.find('Sensor' + (i + 1)).text();
+        //                myLineChart.data.datasets[i].data.shift();
+        //            }
+        //            myLineChart.data.labels[count] = datas.find('TimeOperate').text()
+        //            myLineChart.data.labels.shift();
+        //            myLineChart.update();
+        //        },
+        //        error: function (err) {
+        //            alert("error")
+        //        }
+        //    })
+        //}
 
     </script>
 </asp:Content>
