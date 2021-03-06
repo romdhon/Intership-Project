@@ -1,4 +1,5 @@
-﻿using CpDashboard.Models;
+﻿using CpDashboard.Logics;
+using CpDashboard.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,17 @@ namespace CpDashboard.Accounts
         {
             CpDashboardContext context = new CpDashboardContext();
 
-            if(RegisterPass.Text == RegisterRepass.Text)
+            string reg_pass = new Encryptions().EncryptPassword(RegisterPass.Text);
+            string reg_repass = new Encryptions().EncryptPassword(RegisterRepass.Text);
+
+            if(reg_pass == reg_repass)
             {
                 //singleordefault can only return to var
                 var query = context.Users.SingleOrDefault(q => q.UserName == RegisterEm.Text);
 
                 if(query == null)
                 {
-                    context.Users.Add(InsertUser(RegisterFn.Text, RegisterLn.Text, RegisterEm.Text, RegisterPass.Text));
+                    context.Users.Add(InsertUser(RegisterFn.Text, RegisterLn.Text, RegisterEm.Text, reg_repass));
                     context.SaveChanges();
 
                     query = context.Users.SingleOrDefault(u => u.UserName == RegisterEm.Text);

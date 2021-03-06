@@ -18,6 +18,7 @@ using Advantech.Adam;
 using System.Net.Sockets;
 using System.Data.SqlClient;
 using System.Timers;
+using System.Web.Http;
 
 namespace CpDashboard
 {
@@ -45,6 +46,12 @@ namespace CpDashboard
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Database.SetInitializer(new CpDashboardDatabaseInitializer());
+
+            RouteTable.Routes.MapHttpRoute(
+                name: "Alert",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new {id = System.Web.Http.RouteParameter.Optional}
+            );
 
             CpDashboardContext cont = new CpDashboardContext();
             cont.Database.Initialize(true);

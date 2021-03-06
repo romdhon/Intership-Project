@@ -1,4 +1,5 @@
-﻿using CpDashboard.Models;
+﻿using CpDashboard.Logics;
+using CpDashboard.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,14 @@ namespace CpDashboard.Accounts
 
             if (!string.IsNullOrEmpty(forgotEmail.Text) && new_user != null)
             {
-                
-                if (forgotPass.Text == forgotRepass.Text)
+                string pass = new Encryptions().EncryptPassword(forgotPass.Text);
+                string repass = new Encryptions().EncryptPassword(forgotRepass.Text);
+                if (pass == repass)
                 {
-                    AddUser(ref new_user);
+                    AddUser(ref new_user, ref repass);
                     _db.SaveChanges();
                     new_user = _db.Users.SingleOrDefault(u => u.UserName == forgotEmail.Text
-                                                      && u.Password == forgotPass.Text);
+                                                      && u.Password == repass);
                     Session["Id"] = new_user.UserId;
                     Session["Username"] = new_user.UserName;
                     Session["Password"] = new_user.Password;
@@ -52,9 +54,9 @@ namespace CpDashboard.Accounts
             }
         }
 
-        private void AddUser(ref User auser)
+        private void AddUser(ref User auser, ref string new_pass)
         {
-            auser.Password = forgotRepass.Text;
+            auser.Password = new_pass;
         }
     }
 }

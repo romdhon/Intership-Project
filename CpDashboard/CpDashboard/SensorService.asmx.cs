@@ -6,8 +6,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
+using System.Web.Http;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -192,15 +195,51 @@ namespace CpDashboard
                 AdamRetriever adamData = new AdamRetriever(sensorNum);
                 Dictionary<string, string> getDic = adamData.getAllValues();
 
-                realTimeData.Sensor1 = getDic["sensor1"];
-                realTimeData.Sensor2 = getDic["sensor2"];
-                realTimeData.Sensor3 = getDic["sensor3"];
-                realTimeData.Sensor4 = getDic["sensor4"];
-                realTimeData.TimeOperate = getDic["timeOperate"];
+                string status = adamData.getSensorStatus();
+
+                if (status == "true")
+                {
+                    realTimeData.Sensor1 = getDic["sensor1"];
+                    realTimeData.Sensor2 = getDic["sensor2"];
+                    realTimeData.Sensor3 = getDic["sensor3"];
+                    realTimeData.Sensor4 = getDic["sensor4"];
+                    realTimeData.TimeOperate = getDic["timeOperate"];
+                }
+                realTimeData.Status = status;
             }
-            
+
 
             return realTimeData;
+        }
+
+        [WebMethod]
+        public AlertValue GetAlertValue(string id)
+        {
+            AlertValue alert = new AlertValue();
+            if(int.TryParse(id, out int _id))
+            {
+                alert = _db.AlertValues.SingleOrDefault(a => a.AlertValueID == _id);
+                alert.SensorName = _db.SensorGroups.SingleOrDefault(g => g.GroupID == alert.GroupID).GroupName.ToString();
+            }
+            return alert;
+        }
+
+        [WebMethod]
+        public SensorAlert PostAlert(string sensorname, string threshval, string alertval)
+        {
+            SensorAlert alert = new SensorAlert();
+
+            //change thai year to us year
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
+            alert.SensorName = sensorname;
+            alert.AlertThresholdVal = threshval;
+            alert.AlertVal = alertval;
+            alert.AlertDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            _db.SensorAlerts.Add(alert);
+            _db.SaveChanges();
+            return alert;
         }
     }
 }

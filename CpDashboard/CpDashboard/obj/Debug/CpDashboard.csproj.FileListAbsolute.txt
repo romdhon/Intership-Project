@@ -170,3 +170,9 @@ C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\Cp
 C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\obj\Debug\CpDashboard.csproj.CopyComplete
 C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\obj\Debug\CpDashboard.dll
 C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\obj\Debug\CpDashboard.pdb
+C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\bin\System.Net.Http.Formatting.dll
+C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\bin\System.Web.Http.dll
+C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\bin\System.Web.Http.WebHost.dll
+C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\bin\System.Net.Http.Formatting.xml
+C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\bin\System.Web.Http.xml
+C:\Users\romdh\Desktop\CP_project\C#\Projects\.net_framework\Gits\internships\CpDashboard\CpDashboard\bin\System.Web.Http.WebHost.xml

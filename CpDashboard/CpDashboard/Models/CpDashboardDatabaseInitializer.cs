@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CpDashboard.Logics;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace CpDashboard.Models
     {
         protected override void Seed(CpDashboardContext context)
         {
+            getAlertValues().ForEach(a => context.AlertValues.Add(a));
+            context.SaveChanges();
             GetPositions().ForEach(p => context.Positions.Add(p));
             context.SaveChanges();
             GetUsers().ForEach(u => context.Users.Add(u));
@@ -85,7 +88,7 @@ namespace CpDashboard.Models
                     Name="Romdon",
                     LastName="Uma",
                     UserName="romdon_uma@gmail.com",
-                    Password="12345",
+                    Password=new Encryptions().EncryptPassword("12345"),
                     PositionID=1
                 },
                 new User
@@ -94,11 +97,48 @@ namespace CpDashboard.Models
                     Name="Hazal",
                     LastName="Uma",
                     UserName="hazal_uma@gmail.com",
-                    Password="12345",
+                    Password=new Encryptions().EncryptPassword("12345"),
                     PositionID=2
+                },
+                new User
+                {
+                    UserId=2,
+                    Name="Warakorn",
+                    LastName="Klaharn",
+                    UserName="warakorn9597@gmail.com",
+                    Password=new Encryptions().EncryptPassword("12345"),
+                    PositionID=1
                 },
             };
             return users;
+        }
+
+        private static List<AlertValue> getAlertValues()
+        {
+            var alert = new List<AlertValue>
+            {
+                new AlertValue
+                {
+                    Value="30",
+                    GroupID=1
+                },
+                new AlertValue
+                {
+                    Value="30",
+                    GroupID=2
+                },
+                new AlertValue
+                {
+                    Value="30",
+                    GroupID=3
+                },
+                new AlertValue
+                {
+                    Value="30",
+                    GroupID=4
+                }
+            };
+            return alert;
         }
     }
 

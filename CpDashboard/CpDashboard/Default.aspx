@@ -130,74 +130,127 @@
             }
         }
 
+        function getSensorAlert(_value, _alertval) {
+            var sensor_name = $(_value).find("SensorName").text();
+            var thresh_val = $(_value).find("Value").text();
+
+            if (parseFloat(_alertval) > parseFloat(thresh_val)) {
+                $.ajax({
+                    url: 'SensorService.asmx/PostAlert',
+                    data: {
+                        sensorname: sensor_name,
+                        threshval: thresh_val,
+                        alertval: _alertval,
+                    },
+                    method: 'POST',
+                    type: 'xml',
+                    success: function (succ) {
+                        //alert("getSensorAlert success")
+                    },
+                    error: function (err) {
+                        //alert("getSensorAlert error");
+                    }
+                });
+            } else {
+                //alert("Not in conditions");
+            }
+            
+        }
+
+        //get the alert setting value
+        function getAlertValue(_id, _alertval) {
+            $.ajax({
+                url: 'SensorService.asmx/GetAlertValue',
+                data: { id: _id },
+                type: 'xml',
+                method: 'POST',
+                success: function (value) {
+                    getSensorAlert(value, _alertval);
+                },
+                error: function (err) {
+                    alert("getAlertValue Error");
+                }
+            })
+        }
 
         var myLineChart = new Chart(ctx, options);
         var adder = 0;
 
         //using data from database uncomment this
-        function getAllData() {
-            $.ajax({
-                url: 'SensorService.asmx/GetAllSensors',
-                type: 'xml',
-                method: 'post',
-                success: function (data) {
-                    var datas = $(data);
-                    var eachSensorVal = datas.find('LastVal').text().split('~');
-                    var eachDtVal = datas.find('LastDt').text().split('~');
-                    var dataCount = 12;
-                    for (var ind = 0; ind < eachSensorVal.length; ind++) {
-                        myLineChart.data.datasets[ind].data[dataCount] = eachSensorVal[ind];
-                        myLineChart.data.datasets[ind].data.shift();
-                    }
-
-                    myLineChart.data.labels[dataCount] = eachDtVal[0];
-                    myLineChart.data.labels.shift();
-                    //alert(myLineChart.data.labels);
-                    myLineChart.update();
-                    adder++;
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            })
-        }
-
-        //using real-time data uncomment this
         //function getAllData() {
         //    $.ajax({
-        //        url: 'SensorService.asmx/GetRealTimeData',
-        //        data: { 'num': 4 },
-        //        method: 'post',
+        //        url: 'SensorService.asmx/GetAllSensors',
         //        type: 'xml',
+        //        method: 'post',
         //        success: function (data) {
-        //            //alert("success")
         //            var datas = $(data);
-        //            var count = 12;
-        //            for (var i = 0; i < 4; i++){
-        //                myLineChart.data.datasets[i].data[count] = datas.find('Sensor' + (i + 1)).text();
-        //                myLineChart.data.datasets[i].data.shift();
+        //            var eachSensorVal = datas.find('LastVal').text().split('~');
+        //            var eachDtVal = datas.find('LastDt').text().split('~');
+        //            var dataCount = 12;
+        //            for (var ind = 0; ind < eachSensorVal.length; ind++) {
+        //                myLineChart.data.datasets[ind].data[dataCount] = eachSensorVal[ind];
+        //                myLineChart.data.datasets[ind].data.shift();
         //            }
-        //            myLineChart.data.labels[count] = datas.find('TimeOperate').text()
+
+        //            myLineChart.data.labels[dataCount] = eachDtVal[0];
         //            myLineChart.data.labels.shift();
+        //            //alert(myLineChart.data.labels);
         //            myLineChart.update();
+        //            adder++;
         //        },
         //        error: function (err) {
-        //            alert("error")
+        //            alert(err);
         //        }
         //    })
         //}
 
+        //using real-time data uncomment this
+        function getAllData() {
+            $.ajax({
+                url: 'SensorService.asmx/GetRealTimeData',
+                data: { 'num': 4 },
+                method: 'post',
+                type: 'xml',
+                success: function (data) {
+                    //alert("success")
+                    var datas = $(data);
+                    var count = 12;
+                    var status = datas.find('Status').text();
+                    var onOffStatus = $('#onOffIcon');
+
+                    if (status == "true") {
+                        onOffStatus.removeClass('fas fa-toggle-off');
+                        onOffStatus.addClass('fas fa-toggle-on');
+
+                        for (var i = 0; i < 4; i++) {
+                            myLineChart.data.datasets[i].data[count] = datas.find('Sensor' + (i + 1)).text();
+                            myLineChart.data.datasets[i].data.shift();
+                            getAlertValue(i + 1, datas.find('Sensor' + (i + 1)).text());
+                        }
+                        myLineChart.data.labels[count] = datas.find('TimeOperate').text()
+                        myLineChart.data.labels.shift();
+                        myLineChart.update();
+                    } else {
+                        onOffStatus.removeClass('fas fa-toggle-on');
+                        onOffStatus.addClass('fas fa-toggle-off');
+                    }
+
+                    
+                },
+                error: function (err) {
+                    alert("error")
+                }
+            })
+        }
+
     </script>
 </asp:Content>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="PageHeader" runat="server">
-    <span class="text">Dashboard</span>
-    <%--<asp:Label ID="label1" runat="server"></asp:Label>
-    <asp:Label ID="label2" runat="server"></asp:Label>
-    <asp:Label ID="label3" runat="server"></asp:Label>
-    <asp:Label ID="label4" runat="server"></asp:Label>
-    <asp:Label ID="label5" runat="server"></asp:Label>--%>
-    
+<asp:Content ID="Body" ContentPlaceHolderID="PageHeader" runat="server">
+    <h1 class="h3 mb-0 text-gray-800">
+        <span class="text">Dashboard</span>
+        <span><i id="onOffIcon" class="fas fa-toggle-off"></i></span>
+    </h1>
     <%--<input type="button" id="onOff" class="btn btn-success" value="OFFLINE"/>--%>
 </asp:Content>
 

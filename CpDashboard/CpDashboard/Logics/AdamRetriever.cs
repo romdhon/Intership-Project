@@ -23,9 +23,11 @@ namespace CpDashboard.Logics
         private ushort[] m_usRange; //for newer version
         public int sensorNumber;
         private Dictionary<string, string> sensorValues = new Dictionary<string, string>();
+        private string sensorStatus = "";
 
         public AdamRetriever(int sensorNum)
         {
+            sensorStatus = "false";
             sensorNumber = sensorNum;
             m_bStart = false;			// the action stops at the beginning
             m_szIP = "192.168.10.10";	// modbus slave IP address
@@ -135,13 +137,20 @@ namespace CpDashboard.Logics
                         sensorValues.Add("sensor"+(num+1), fValue[num].ToString());
                     }
                     sensorValues.Add("timeOperate", DateTime.Now.ToString("HH:mm:ss"));
+                    sensorStatus = "true";
                 }
+                adamModbus.Disconnect();
             }
         }
 
         public Dictionary<string, string> getAllValues()
         {
             return sensorValues;
+        }
+
+        public string getSensorStatus()
+        {
+            return sensorStatus;
         }
     }
 }

@@ -1,75 +1,100 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Blank.Master" AutoEventWireup="true" CodeBehind="LoginPage.aspx.cs" Inherits="CpDashboard.Accounts.LoginPage" %>
 
 <asp:Content ContentPlaceHolderID="BlankJSContent" runat="server">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
 </asp:Content>
 
 <asp:Content ID="LoginContent" ContentPlaceHolderID="BlankContent" runat="server">
-    <body class="bg-gradient-primary">
-        <div class="container">
+<%--<div class="container">--%>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="/img/icons/img-01.png" alt="IMG">
+				</div>
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+				<form class="login100-form validate-form" runat="server">
+					<span class="login100-form-title">
+						Member Login
+					</span>
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<%--<input class="input100" type="text" name="email" placeholder="Email">--%>
+						<asp:TextBox runat="server" ID="UserEmail" CssClass="input100" placeholder="Email" />
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <form class="user" runat="server">
-                                        <div class="form-group">
-                                            <asp:TextBox TextMode="Email" ID="UserEmail" placeholder="Enter Email Address..." 
-                                                runat="server" CssClass="form-control form-control-user"
-                                                aria-describedby="emailHelp" required/>
-                                        </div>
-                                        <div class="form-group">
-
-                                            <asp:TextBox TextMode="Password" CssClass="form-control form-control-user"
-                                                id="UserPassword" placeholder="Password" runat="server" required/>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <asp:Button CssClass="btn btn-primary btn-user btn-block" ID="SubmitLogin" 
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<%--<input class="input100" type="password" name="pass" placeholder="Password">--%>
+						<asp:TextBox TextMode="Password" ID="UserPassword" runat="server" CssClass="input100" placeholder="password"/>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<%--<button class="login100-form-btn">
+							Login
+						</button>--%>
+						<asp:Button CssClass="login100-form-btn" ID="SubmitLogin" 
                                             OnClick="SubmitLogin_Click" runat="server" Text="Login"/>
-                                            
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/Accounts/ForgotPasswordPage.aspx">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/Accounts/RegisterPage.aspx">Create an Account!</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+					</div>
 
-            </div>
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="/Accounts/ForgotPasswordPage.aspx">
+							Username / Password?
+						</a>
+					</div>
 
-        </div>
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/Accounts/RegisterPage.aspx">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	<%--</div>--%>
 
-    </div>
-    </body>
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+    </script>
+<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
     
 </asp:Content>
     
