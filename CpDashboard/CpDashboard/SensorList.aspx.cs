@@ -33,6 +33,12 @@ namespace CpDashboard
                 this.asensor = _db.Sensors.Where(a => a.GroupId == g_id).First();
                 this.group = _db.SensorGroups.SingleOrDefault(g => g.GroupID == g_id);
 
+                //put the initial value to textbox
+                if (!IsPostBack)
+                {
+                    alertTxt.Text = _db.AlertValues.SingleOrDefault(a => a.GroupID == g_id).Value.ToString();
+                }
+
                 var allSensorVal = _db.Sensors.Where(s => s.GroupId == g_id);
 
                 // loop through all sensors and add into a list
@@ -85,6 +91,15 @@ namespace CpDashboard
         protected void listTimer_Tick(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "updateSensorVal", "updateSensorVal()", true);
+        }
+
+        protected void alertSubmit_Click(object sender, EventArgs e)
+        {
+            var groupid = Request.QueryString["group_id"];
+            if (int.TryParse(groupid, out int g_id)) {
+                _db.AlertValues.SingleOrDefault(a => a.GroupID == g_id).Value = alertTxt.Text;
+                _db.SaveChanges();
+            }
         }
     }
 

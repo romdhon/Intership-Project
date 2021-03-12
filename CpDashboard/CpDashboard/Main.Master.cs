@@ -21,6 +21,11 @@ namespace CpDashboard
             //sensortype = _db.SensorTypes.ToList();
         }
 
+        //protected void alertTimer_Tick(object sender, EventArgs e)
+        //{
+        //    ScriptManager.RegisterStartupScript(this, GetType(), "detectAlert", "detectAlert()", true);
+        //}
+
         //public List<SensorType> GetSensorTypes()
         //{
         //    return _db.SensorTypes.ToList();

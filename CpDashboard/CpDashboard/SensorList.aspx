@@ -183,7 +183,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="PageContent" runat="server">
             <h1 style="display: inline"><%: group.GroupName %></h1>
             <h2 class="text-gray-800" style="display: inline"><i id="iOnOff" class="fas fa-toggle-off"></i></h2>
-
+            
+        <form runat="server">
             <div class="row">
                 <!-- Area Chart -->
                 <div class="col-xl-12 col-lg-7">
@@ -208,7 +209,7 @@
                             </div>
                         </div>
                         <!-- Card Body -->
-                        <form runat="server">
+                        
                             <asp:ScriptManager ID="listScript" runat="server"></asp:ScriptManager>
                             <asp:Timer ID="listTimer" runat="server" OnTick="listTimer_Tick" Interval="2000">
                             </asp:Timer>
@@ -226,11 +227,19 @@
                                     <canvas id="myAreaChart<%: asensor.SensorID %>"></canvas>
                                 </div>
                             </div>
-                        </form>
-                        
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label>Max Value: </label>
+                <%--<input type="number" id="maxValInput" class="form-control" />--%>
+                <asp:TextBox runat="server" ID="alertTxt" CssClass="form-control" TextMode="Number" />
+            </div>
+            <div class="form-group">
+                <%--<input value="Submit" type="submit" id="alertSubmit" class="btn btn-success" />--%>
+                <asp:Button Text="Submit" id="alertSubmit" runat="server" OnClick="alertSubmit_Click" CssClass="btn btn-success" />
+            </div>
+        </form>
 
            
     

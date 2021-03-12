@@ -2,6 +2,7 @@
 
 
 <asp:Content ID="DefaultJS" ContentPlaceHolderID="JSMain" runat="server">
+    <script src="js/AlertFunc.js"></script>
     <script language="javascript" type="text/javascript">
             
         var lines = [];
@@ -130,48 +131,7 @@
             }
         }
 
-        function getSensorAlert(_value, _alertval) {
-            var sensor_name = $(_value).find("SensorName").text();
-            var thresh_val = $(_value).find("Value").text();
-
-            if (parseFloat(_alertval) > parseFloat(thresh_val)) {
-                $.ajax({
-                    url: 'SensorService.asmx/PostAlert',
-                    data: {
-                        sensorname: sensor_name,
-                        threshval: thresh_val,
-                        alertval: _alertval,
-                    },
-                    method: 'POST',
-                    type: 'xml',
-                    success: function (succ) {
-                        //alert("getSensorAlert success")
-                    },
-                    error: function (err) {
-                        //alert("getSensorAlert error");
-                    }
-                });
-            } else {
-                //alert("Not in conditions");
-            }
-            
-        }
-
-        //get the alert setting value
-        function getAlertValue(_id, _alertval) {
-            $.ajax({
-                url: 'SensorService.asmx/GetAlertValue',
-                data: { id: _id },
-                type: 'xml',
-                method: 'POST',
-                success: function (value) {
-                    getSensorAlert(value, _alertval);
-                },
-                error: function (err) {
-                    alert("getAlertValue Error");
-                }
-            })
-        }
+        
 
         var myLineChart = new Chart(ctx, options);
         var adder = 0;
@@ -225,7 +185,6 @@
                         for (var i = 0; i < 4; i++) {
                             myLineChart.data.datasets[i].data[count] = datas.find('Sensor' + (i + 1)).text();
                             myLineChart.data.datasets[i].data.shift();
-                            getAlertValue(i + 1, datas.find('Sensor' + (i + 1)).text());
                         }
                         myLineChart.data.labels[count] = datas.find('TimeOperate').text()
                         myLineChart.data.labels.shift();
@@ -234,8 +193,6 @@
                         onOffStatus.removeClass('fas fa-toggle-on');
                         onOffStatus.addClass('fas fa-toggle-off');
                     }
-
-                    
                 },
                 error: function (err) {
                     alert("error")

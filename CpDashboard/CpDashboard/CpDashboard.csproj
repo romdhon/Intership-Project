@@ -188,6 +188,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AddSensor.aspx" />
+    <Content Include="AlertReport.aspx" />
     <Content Include="Arraylistjavascript.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="AdminSetting.aspx" />
@@ -208,6 +209,7 @@
     <Content Include="img\icons\favicon.ico" />
     <Content Include="img\icons\img-01.png" />
     <Content Include="img\icons\sign-up-icon.jpg" />
+    <Content Include="js\AlertFunc.js" />
     <Content Include="js\main.js" />
     <Content Include="PostTest.aspx" />
     <Content Include="ProfileEdit.aspx" />
@@ -2354,6 +2356,13 @@
     </Compile>
     <Compile Include="AddSensor.aspx.designer.cs">
       <DependentUpon>AddSensor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlertReport.aspx.cs">
+      <DependentUpon>AlertReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlertReport.aspx.designer.cs">
+      <DependentUpon>AlertReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="AlertsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

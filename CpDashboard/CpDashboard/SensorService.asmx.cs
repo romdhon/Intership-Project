@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -240,6 +241,16 @@ namespace CpDashboard
             _db.SensorAlerts.Add(alert);
             _db.SaveChanges();
             return alert;
+        }
+
+        //getting alert sensor value
+        [WebMethod]
+        public void getAlertJSValue()
+        {
+            List<SensorAlert> sensorAlertList = new List<SensorAlert>();
+            sensorAlertList = _db.SensorAlerts.ToList();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Write(js.Serialize(sensorAlertList));
         }
     }
 }

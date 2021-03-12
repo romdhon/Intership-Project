@@ -22,9 +22,44 @@
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="js/AlertFunc.js"></script>
 
         <!-- Custom styles for this template-->
         <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+        <script>
+            function detectAlert() {
+                $.ajax({
+                    url: 'SensorService.asmx/GetRealTimeData',
+                    data: { 'num': 4 },
+                    method: 'post',
+                    type: 'xml',
+                    success: function (data) {
+                        
+                        var datas = $(data);
+                        var status = datas.find('Status').text();
+                        
+
+                        if (status == "true") {
+
+                            for (var i = 0; i < 4; i++) {
+                                var sensorVal = datas.find('Sensor' + (i + 1)).text();
+                                getAlertValue(i + 1, sensorVal);
+                            }
+                        } 
+
+
+                    },
+                    error: function (err) {
+                        alert("error")
+                    }
+                })
+            }
+
+            $(document).ready(function () {
+                setInterval(detectAlert, 2000)
+            })
+        </script>
 
         <asp:ContentPlaceHolder ID="MainCssContent" runat="server">
         </asp:ContentPlaceHolder>
@@ -422,11 +457,14 @@
                 </div>
             </div>
 
-    
+
+            <%--<asp:Timer runat="server" ID="alertTimer" OnTick="alertTimer_Tick" Interval="2000">
+            </asp:Timer>--%>
 
             <!-- Bootstrap core JavaScript-->
-            <script src="/vendor/jquery/jquery.min.js"></script>
+            
             <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
             <!-- Core plugin JavaScript-->
             <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
